@@ -84,7 +84,7 @@
         renderList();
         updateToolbarState();
         statusEl.innerHTML = `Open chat.deepseek.com and try again. <span style="float:right">
-  provided by <a style="text-decoration: none;color:black;" target="_dudikkocak" href="https://dudik.store?ref=ds-code-extractor">Dudik Kocak</a>
+  provided by <a style="text-decoration: none;color:black;" target="_dudikkocak" href="https://dudik.store?ref=ds-code-extractor">Dudik Store</a>
   </span>`;
         return;
       }
