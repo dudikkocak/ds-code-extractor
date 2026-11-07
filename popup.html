@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      width: 560px;
+      margin: 0;
+      padding: 12px;
+      font-size: 13px;
+      color: #1a1a1a;
+      background: #fff;
+    }
+    h2 { margin: 0 0 8px; font-size: 15px; font-weight: 600; }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 10px;
+      align-items: center;
+    }
+    .toolbar button {
+      padding: 5px 12px;
+      border: 1px solid #d0d0d0;
+      border-radius: 6px;
+      background: #f5f5f5;
+      cursor: pointer;
+      font-size: 12px;
+      font-family: inherit;
+    }
+    .toolbar button:hover { background: #e8e8e8; }
+    .toolbar button.primary {
+      background: #4d6bfe;
+      color: #fff;
+      border-color: #4d6bfe;
+    }
+    .toolbar button.primary:hover { background: #3a58e8; }
+    .toolbar button:disabled { opacity: .5; cursor: not-allowed; }
+
+    .flatten-label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      color: #555;
+      margin-left: 4px;
+      cursor: pointer;
+    }
+    .flatten-label.disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    #fileList {
+      max-height: 420px;
+      overflow-y: auto;
+      border: 1px solid #e8e8e8;
+      border-radius: 8px;
+      background: #fafafa;
+    }
+    .file-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 8px 10px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .file-row:last-child { border-bottom: none; }
+    .file-row:hover { background: #f0f4ff; }
+    .file-row input[type="checkbox"] {
+      margin-top: 8px;
+      accent-color: #4d6bfe;
+      flex-shrink: 0;
+    }
+    .file-info { flex: 1; min-width: 0; }
+
+    .file-name-input,
+    .file-path-input {
+      width: 100%;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      padding: 3px 6px;
+      font-family: ui-monospace, Menlo, Consolas, monospace;
+      margin-bottom: 3px;
+    }
+    .file-name-input {
+      font-weight: 600;
+      font-size: 12px;
+      color: #222;
+    }
+    .file-path-input {
+      font-size: 11px;
+      color: #666;
+    }
+    .file-name-input:focus,
+    .file-path-input:focus {
+      outline: none;
+      border-color: #4d6bfe;
+      box-shadow: 0 0 0 2px rgba(77,107,254,.15);
+    }
+
+    .file-meta {
+      font-size: 11px;
+      color: #888;
+      margin: 3px 0;
+    }
+    .file-preview {
+      font-family: ui-monospace, Menlo, Consolas, monospace;
+      font-size: 11px;
+      color: #555;
+      background: #f4f4f4;
+      padding: 4px 6px;
+      border-radius: 4px;
+      white-space: pre;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-height: 42px;
+    }
+    .empty {
+      padding: 24px;
+      text-align: center;
+      color: #aaa;
+    }
+    #status {
+      margin-top: 8px;
+      font-size: 11px;
+      color: #666;
+      min-height: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+  <h2>DeepSeek Code Extractor</h2>
+  </div>
+
+  <div class="toolbar">
+    <button id="selectAll">Select All</button>
+    <button id="selectNone">Select None</button>
+    <button id="refresh">Refresh</button>
+    <label class="flatten-label">
+      <input type="checkbox" id="flattenFolders" />
+      Flatten
+    </label>
+    <label class="flatten-label" id="askWhereLabel">
+      <input type="checkbox" id="askWhere" checked />
+      Ask where to save
+    </label>
+    <button id="downloadZip" class="primary" disabled>Download ZIP (0)</button>
+    <button id="downloadFiles" disabled>Download Files (0)</button>
+  </div>
+
+  <div id="fileList">
+    <div class="empty">Click “Refresh” to scan the page.</div>
+  </div>
+  
+  <div id="status"></div>
+  <script src="jszip.min.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
