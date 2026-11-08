@@ -3,7 +3,7 @@
   "name": "DeepSeek Code Extractor",
   "version": "1.1.0",
   "description": "Extract fenced code blocks from chat.deepseek.com with filename/path detection, optional per-file save dialog, and ZIP download.",
-  "permissions": ["activeTab", "scripting", "downloads"],
+  "permissions": ["activeTab", "downloads"],
   "host_permissions": ["https://chat.deepseek.com/*"],
   "action": {
     "default_popup": "popup.html",
